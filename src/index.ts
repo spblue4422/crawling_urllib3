@@ -67,18 +67,15 @@ async function getHtmls() {
             };
 
             jsonArr.push(json);
-            // fs.appendFileSync("datas.txt", response.choices[0].message.content);
           })
         );
-
-        // console.log(url);
       })
     );
 
-    // console.log(jsonArr);
-    fs.appendFileSync("datas.txt", jsonArr.toString());
+    const ws = xlsx.utils.json_to_sheet(jsonArr);
+    xlsx.utils.book_append_sheet(excel, ws);
 
-    // xlsx.writeFile(excel, "data.xlsx");
+    xlsx.writeFile(excel, "data.xlsx");
   } catch (error) {
     console.log(error);
   }
